@@ -1,17 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import FitnessDashboard from './components/FitnessDashboard'
+import React, { useState } from 'react';
+import Login from './components/Login.jsx';
+import FitnessDashboard from './components/FitnessDashboard.jsx';
+// import AboutPage from './AboutPage.jsx';
+// import SettingsPage from './SettingsPage.jsx';
 
-function App() {
-  const [count, setCount] = useState(0)
+// Main application component that manages the current page and login state
+const App = () => {
+  const [currentPage, setCurrentPage] = useState('login');
 
-  return (
-    <>
-      <FitnessDashboard />
-    </>
-  )
-}
+  const handleLoginSuccess = () => {
+    setCurrentPage('dashboard');
+  };
 
-export default App
+  const handleLogout = () => {
+    setCurrentPage('login');
+  };
+
+  const handlePageChange = (pageName) => {
+    setCurrentPage(pageName);
+  };
+
+  // Conditionally render the correct component based on the current page state
+  switch (currentPage) {
+    case 'login':
+      return <Login onLoginSuccess={handleLoginSuccess} />;
+    case 'dashboard':
+      return <FitnessDashboard onLogout={handleLogout} onPageChange={handlePageChange} />;
+    case 'about':
+      // return <AboutPage onPageChange={handlePageChange} />;
+    case 'settings':
+      // return <SettingsPage onPageChange={handlePageChange} />;
+    default:
+      return <Login onLoginSuccess={handleLoginSuccess} />;
+  }
+};
+
+export default App;
