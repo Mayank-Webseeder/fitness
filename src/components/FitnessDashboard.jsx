@@ -45,7 +45,22 @@ import {
   UserSquare,
   Phone,
   Sun,
-  MinusCircle
+  MinusCircle,
+  CircleQuestionMark,
+  Newspaper,
+  Share2,
+  SquareUser,
+  FolderDown,
+  ThumbsUp,
+  BadgeQuestionMark,
+  BadgeIndianRupee,
+  QrCode,
+  BanknoteArrowDown,
+  BellPlus,
+  Star,
+  Files,
+  Boxes,
+  Watch
 } from 'lucide-react';
 import Reports from './Reports';
 import AllMemberships from './Membership/AllMemberships';
@@ -61,6 +76,22 @@ import Summary from './Finance/Summary';
 import ConfigPayment from './Finance/ConfigPayment';
 import AllDietPlans from './Diet/AllDietPlans';
 import ConfigDiet from './Diet/ConfigDiet';
+import Versions from './Help/Versions';
+import AboutUs from './Help/AboutUs';
+import MyReferrals from './Help/MyReferrals';
+import Faq from './Help/Faq';
+import TrackYourSuggestions from './Help/TrackYourSuggestions';
+import Article from './Help/Article';
+import Bi_dashboard from './Business_Insights/BI_dashboard';
+import PaymentRequest from './Member_App/Paymentrequest';
+import QRcodes from './Member_App/QRcodes';
+import Paymentgateway from './Member_App/Paymentgateway';
+import PushNotification from './Member_App/PushNotification';
+import Groups from './Member/Groups';
+import FollowUpTypes from './Member/FollowUpTypes';
+import Categories from './Member/Categories';
+import MasterWorkoutPlan from './Workout/MasterWorkoutPlan';
+
 
 const FitnessDashboard = () => {
   // State for sidebar visibility and menu expansion
@@ -111,7 +142,7 @@ const FitnessDashboard = () => {
       icon: Users, 
       label: 'Members',
       key: 'members',
-      active: activeComponent.startsWith('members'), // Check if the key starts with 'members'
+      active: activeComponent.startsWith('members'),
       hasSubmenu: true,
       submenu: [
         { icon: UserPlus, label: 'Add Members', key: 'add-members' },
@@ -120,7 +151,18 @@ const FitnessDashboard = () => {
         { icon: MessageSquare, label: 'Feedback', key: 'feedback' },
         { icon: History, label: 'Follow Up History', key: 'follow-up-history' },
         { icon: CalendarDays, label: 'Attendance', key: 'attendance' },
-        { icon: CalendarDays, label: 'Config', key: 'config' }
+        { 
+          icon: Settings, 
+          label: 'Config',
+          key: 'help-config',
+          active: activeComponent.startsWith('help-config'),
+          hasSubmenu: true,
+          submenu: [
+            { icon: Boxes, label: 'Groups', key: 'groups' },
+            { icon: SquareUser, label: 'Follow-Up Types', key: 'follow-up-types' },
+            { icon: Files, label: 'Categories', key: 'categories' }
+          ]
+        }
       ]
     },
     { icon: BarChart4, label: 'Reports', key: 'reports', active: activeComponent === 'reports' },
@@ -139,48 +181,119 @@ const FitnessDashboard = () => {
       ]
     },
     { 
-      icon: Wallet, 
-      label: 'Finance', 
-      key: 'finance', 
-      active: activeComponent.startsWith('finance'),
-      hasSubmenu: true,
-      submenu: [
-        { icon: List, label: 'All Invoices', key: 'all-invoices' },
-        { icon: CalendarDays, label: 'Today Invoices', key: 'today-invoices' },
-        { icon: Sun, label: 'Daywise Collection', key: 'daywise-collection' },
-        { icon: Calendar, label: 'Monthwise Collection', key: 'monthwise-collection' },
-        { icon: MinusCircle, label: 'Expenses', key: 'expenses' },
-        { icon: PieChart, label: 'Summary', key: 'summary' },
-        { icon: Settings, label: 'Config', key: 'config-payment' }
-      ]
-    },
+      icon: Wallet, 
+      label: 'Finance', 
+      key: 'finance', 
+      active: activeComponent.startsWith('finance'),
+      hasSubmenu: true,
+      submenu: [
+        { icon: List, label: 'All Invoices', key: 'all-invoices' },
+        { icon: CalendarDays, label: 'Today Invoices', key: 'today-invoices' },
+        { icon: Sun, label: 'Daywise Collection', key: 'daywise-collection' },
+        { icon: Calendar, label: 'Monthwise Collection', key: 'monthwise-collection' },
+        { icon: MinusCircle, label: 'Expenses', key: 'expenses' },
+        { icon: PieChart, label: 'Summary', key: 'summary' },
+        { icon: Settings, label: 'Config', key: 'config-payment' }
+      ]
+    },
     {
-      icon: Apple, 
-      label: 'Diet', 
-      key: 'diet', 
-      active: activeComponent.startsWith('diet'),
-      hasSubmenu: true,
-      submenu: [
-        { icon: List, label: 'All Diet Plans', key: 'all-diet-plans' },
-        { icon: Settings, label: 'Config', key: 'config-diet' }
-      ]
-    },
-    { icon: Zap, label: 'Workout', key: 'workout', active: activeComponent === 'workout' },
-    { icon: LineChart, label: 'Business Insights', key: 'business-insights', active: activeComponent === 'business-insights' },
+      icon: Apple, 
+      label: 'Diet', 
+      key: 'diet', 
+      active: activeComponent.startsWith('diet'),
+      hasSubmenu: true,
+      submenu: [
+        { icon: List, label: 'All Diet Plans', key: 'all-diet-plans' },
+        { icon: Settings, label: 'Config', key: 'config-diet' }
+      ]
+    },
+    
+    { 
+      icon: Zap, 
+      label: 'Workout',
+      key: 'workout',
+      active: activeComponent.startsWith('member-app'),
+      hasSubmenu: true,
+      submenu: [
+        { icon: Watch, label: 'All Workout Plan', key: 'all-workout-plans' },
+        { 
+          icon: Settings, 
+          label: 'Config',
+          key: 'workout-config',
+          active: activeComponent.startsWith('workout-config'),
+          hasSubmenu: true,
+          submenu: [
+            { icon: Watch, label: 'Master Workout Plans', key: 'master-workout-plans' }
+          ]
+        }
+      ]
+    },
+
+
+    {
+      icon: LineChart, 
+      label: 'Business Insights', 
+      key: 'business-insights', 
+      active: activeComponent.startsWith('business-insights'),
+      hasSubmenu: true,
+      submenu: [
+        { icon: Star, label: 'Dashboard', key: 'business-insights-dashboard' }
+      
+      ]
+    },
+
+
     { icon: Target, label: 'Leads', key: 'leads', active: activeComponent === 'leads' },
     { icon: UserSquare, label: 'Staff', key: 'staff', active: activeComponent === 'staff' },
     { icon: Building2, label: 'Reminders', key: 'reminders', active: activeComponent === 'reminders' },
     { icon: MessageCircle, label: 'SMS', key: 'sms', active: activeComponent === 'sms' },
+    { 
+      icon: BadgeQuestionMark, 
+      label: 'Help',
+      key: 'help',
+      active: activeComponent.startsWith('help'),
+      hasSubmenu: true,
+      submenu: [
+        { icon: FolderDown, label: 'Versions', key: 'versions' },
+        { icon: SquareUser, label: 'About Us', key: 'about-us' },
+        { icon: Share2, label: 'My Referrals', key: 'my-referrals' },
+        { icon: CircleQuestionMark, label: 'FAQ', key: 'faq' },
+        { icon: Newspaper, label: 'Article', key: 'article' },
+        { icon: ThumbsUp, label: 'Track Your Suggestions', key: 'track-your-suggestions' }
+      ]
+    },
     { icon: Phone, label: 'Contact Us', key: 'contact-us', active: activeComponent === 'contact-us' },
+    { 
+      icon: Phone, 
+      label: 'Member App',
+      key: 'member-app',
+      active: activeComponent.startsWith('member-app'),
+      hasSubmenu: true,
+      submenu: [
+        { icon: BadgeIndianRupee, label: 'Payment Request', key: 'payment-request' },
+        { icon: QrCode, label: 'QR Codes', key: 'qr-codes' },
+        { icon: BanknoteArrowDown, label: 'Payment Gateways', key: 'payment-gateways' },
+        { 
+          icon: Settings, 
+          label: 'Config',
+          key: 'help-config',
+          active: activeComponent.startsWith('help-config'),
+          hasSubmenu: true,
+          submenu: [
+            { icon: BellPlus, label: 'Push Notifications', key: 'push-notifications' }
+          ]
+        }
+      ]
+    },
     { icon: Settings, label: 'Settings', key: 'settings', active: activeComponent === 'settings' },
     { icon: UserCog, label: 'Profile', key: 'profile', active: activeComponent === 'profile' }
   ];
 
-  // Component for rendering a single sidebar item with or without a submenu
+  // Recursive SidebarItem for nested submenus
   const SidebarItem = ({ item, active, onClick }) => {
     const isExpanded = expandedMenus[item.label];
     const Icon = item.icon;
-    
+
     return (
       <div className="mb-1">
         <div 
@@ -210,19 +323,14 @@ const FitnessDashboard = () => {
         
         {item.hasSubmenu && isExpanded && (
           <div className="ml-4 mt-2 space-y-1 border-l-2 border-gray-300 pl-4">
-            {item.submenu.map((subItem, subIndex) => {
-              const SubIcon = subItem.icon;
-              return (
-                <div
-                  key={subIndex}
-                  className={`flex items-center space-x-3 px-3 py-2 rounded-lg cursor-pointer transition-all duration-200 text-gray-500 hover:bg-blue-50 hover:text-blue-600`}
-                  onClick={() => onClick(subItem.key || subItem.label.toLowerCase().replace(' ', '-'))}
-                >
-                  <SubIcon className="w-4 h-4" />
-                  <span className="text-sm">{subItem.label}</span>
-                </div>
-              );
-            })}
+            {item.submenu.map((subItem, subIndex) => (
+              <SidebarItem
+                key={subIndex}
+                item={subItem}
+                active={subItem.active}
+                onClick={onClick}
+              />
+            ))}
           </div>
         )}
       </div>
@@ -240,29 +348,31 @@ const FitnessDashboard = () => {
       case 'follow-up-history':
       case 'attendance':
       case 'config':
-        return <MembersComponent activeTab={activeComponent} />;
-  
-      
-      case 'reports':
-      return <Reports />;
+      case 'groups':
+        return <Groups />;
+      case 'follow-up-types':
+        return <FollowUpTypes />;
+      case 'categories':
+        return <Categories />;
 
+        return <MembersComponent activeTab={activeComponent} />;
+      case 'reports':
+        return <Reports />;
       //MEMBERSHIPS
       case 'all-membership':
         return <AllMemberships />;
       case 'pending-balance':
         return <PendingBalance />;
       case 'sales':
-        return <Sales/>
+        return <Sales/>;
       case 'freeze-info':
-        return <FreezeInfo />
+        return <FreezeInfo />;
       case 'config-master':
-        return <ConfigMaster />
-
+        return <ConfigMaster />;
       //FINANCES
       case 'all-invoices':
         return <AllInvoices />;
       case 'today-invoices':
-        // return <TodayInvoices />;
         return <AllInvoices />;
       case 'daywise-collection':
         return <DaywiseCollection />;
@@ -274,18 +384,51 @@ const FitnessDashboard = () => {
         return <Summary />;
       case 'config-payment':
         return <ConfigPayment />;
-
       //DIETS
       case 'all-diet-plans':
         return <AllDietPlans />;
       case 'config-diet':
         return <ConfigDiet />;
+      //HELP
+      case 'help':
+      case 'versions':
+        return <Versions />;
+      case 'about-us':
+        return <AboutUs />;
+      case 'my-referrals':
+        return <MyReferrals />;
+      case 'faq':
+        return <Faq />;
+      case 'article':
+        return <Article />;
+      case 'track-your-suggestions':
+        return <TrackYourSuggestions />;
+      
+      //BUSINESS INSIGHTS
+        case 'business-insights':
+          case 'business-insights-dashboard':
+          return <Bi_dashboard />;
 
-      // case 'dashboard':
-      // return <DashboardComponent />;
+      //MEMBER APP
+      case 'member-app':
+      case 'payment-request':
+        return <PaymentRequest />;
+      case 'qr-codes':
+        return <QRcodes />;
+      case 'payment-gateways':
+        return <Paymentgateway />;
+      case 'push-notifications':
+        return <PushNotification />;
+      //WORKOUT
+      case 'Workout':
+      case 'all-workout-plans':
+      case 'workout-config':
+        
+      case 'master-workout-plans':
+        return <MasterWorkoutPlan />;
+      
+      
 
-      // case 'settings':
-      // return <SettingsComponent />;
 
       default:
         return (
@@ -310,7 +453,6 @@ const FitnessDashboard = () => {
                 );
               })}
             </div>
-
             {/* Charts and Data */}
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
               {/* Collection vs Expense Donut Chart */}
@@ -360,7 +502,6 @@ const FitnessDashboard = () => {
                   </div>
                 </div>
               </div>
-
               {/* Collection Trend Line Chart */}
               <div className="xl:col-span-1">
                 <div className={`bg-white border-gray-200 shadow-lg rounded-2xl p-6 border`}>
@@ -388,7 +529,6 @@ const FitnessDashboard = () => {
                   </div>
                 </div>
               </div>
-
               {/* Birthdays & Anniversaries List */}
               <div className="xl:col-span-1">
                 <div className={`bg-white border-gray-200 shadow-lg rounded-2xl p-6 border`}>
@@ -413,7 +553,6 @@ const FitnessDashboard = () => {
                 </div>
               </div>
             </div>
-
             {/* Membership Status Lists */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className={`bg-white border-gray-200 shadow-lg rounded-2xl p-6 border`}>
@@ -437,7 +576,6 @@ const FitnessDashboard = () => {
                   ))}
                 </div>
               </div>
-
               <div className={`bg-white border-gray-200 shadow-lg rounded-2xl p-6 border`}>
                 <h3 className={`text-lg font-bold mb-6 text-gray-800`}>Membership Overdues</h3>
                 <div className="space-y-3">
@@ -471,7 +609,6 @@ const FitnessDashboard = () => {
       {sidebarOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} />
       )}
-      
       {/* Sidebar */}
       <div className={`fixed left-0 top-0 h-full w-72 bg-white border-gray-200 shadow-xl border-r z-50 transform transition-transform duration-300 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -493,7 +630,6 @@ const FitnessDashboard = () => {
             </button>
           </div>
         </div>
-        
         {/* Sidebar Navigation - Scrollable */}
         <div className="flex-1 overflow-y-auto p-4 space-y-1" style={{ maxHeight: 'calc(100vh - 140px)' }}>
           {sidebarItems.map((item, index) => (
@@ -506,7 +642,6 @@ const FitnessDashboard = () => {
             ))}
         </div>
       </div>
-
       {/* Main Content */}
       <div className="lg:ml-72 transition-all duration-300">
         {/* Header */}
@@ -528,7 +663,6 @@ const FitnessDashboard = () => {
                 />
               </div>
             </div>
-            
             <div className="flex items-center space-x-3 sm:space-x-4">
               <div className="relative">
                 <button className={`p-2 rounded-xl transition-colors hover:bg-gray-100`}>
@@ -549,7 +683,6 @@ const FitnessDashboard = () => {
               </div>
             </div>
           </div>
-          
           {/* Mobile Search */}
           <div className="mt-4 sm:hidden">
             <div className="relative">
@@ -562,7 +695,6 @@ const FitnessDashboard = () => {
             </div>
           </div>
         </header>
-
         {/* Dashboard Content */}
         <main className="p-4 sm:p-6 space-y-6">
             {renderActiveComponent()}
