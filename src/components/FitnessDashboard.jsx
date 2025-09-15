@@ -60,7 +60,9 @@ import {
   Star,
   Files,
   Boxes,
-  Watch
+  Watch,
+  ListRestart,
+  UserRoundPlus
 } from 'lucide-react';
 import Reports from './Reports';
 import AllMemberships from './Membership/AllMemberships';
@@ -91,6 +93,14 @@ import Groups from './Member/Groups';
 import FollowUpTypes from './Member/FollowUpTypes';
 import Categories from './Member/Categories';
 import MasterWorkoutPlan from './Workout/MasterWorkoutPlan';
+import Lead_Categories from './Leads/Lead_Categories';
+import FollowUpsTypes from './Leads/FollowUpsTypes';
+import Sources from './Leads/Sources';
+import Status from './Leads/Status';
+import Staff_Types from './Staff/Staff_Types';
+import General_templates from './SMS/General_templates';
+import Bulk_whatsapp from './SMS/Bulk_whatsapp';
+import Sms_settings from './SMS/Sms_settings';
 
 
 const FitnessDashboard = () => {
@@ -243,10 +253,81 @@ const FitnessDashboard = () => {
     },
 
 
-    { icon: Target, label: 'Leads', key: 'leads', active: activeComponent === 'leads' },
-    { icon: UserSquare, label: 'Staff', key: 'staff', active: activeComponent === 'staff' },
+    { 
+      icon: Users, 
+      label: 'Leads',
+      key: 'leads',
+      active: activeComponent === ('leads'),
+      hasSubmenu: true,
+      submenu: [
+        { icon: Users, label: 'All Leads', key: 'all-leads' },
+        { icon: UserRoundPlus, label: 'Add Leads', key: 'add-leads' },
+        { icon: ListRestart, label: 'Follow Ups History', key: 'follow-ups-history' },
+        { 
+          icon: Settings, 
+          label: 'Config',
+          key: 'leads-config',
+          active: activeComponent === ('leads-config'),
+          hasSubmenu: true,
+          submenu: [
+            { icon: BellPlus, label: 'Categories', key: 'leads-categories' },
+            { icon: BellPlus, label: 'Follow Up Types', key: 'follow-ups-types' },
+            { icon: BellPlus, label: 'Sources', key: 'sources' },
+            { icon: BellPlus, label: 'Status', key: 'status' }
+          ]
+        }
+      ]
+    },
+
+
+    { 
+      icon: UserSquare, 
+      label: 'Staff',
+      key: 'staff',
+      active: activeComponent === ('staff'),
+      hasSubmenu: true,
+      submenu: [
+        { icon: Users, label: 'All Staff', key: 'all-staff' },
+        { icon: UserRoundPlus, label: 'Add Staff', key: 'add-staff' },
+        { icon: CalendarDays, label: 'Attendance', key: 'attendance' },
+        { 
+          icon: Settings, 
+          label: 'Config',
+          key: 'leads-config',
+          active: activeComponent === ('staff-config'),
+          hasSubmenu: true,
+          submenu: [
+            { icon: BellPlus, label: 'Staff Types', key: 'staff-types' }
+          ]
+        }
+      ]
+    },
+
     { icon: Building2, label: 'Reminders', key: 'reminders', active: activeComponent === 'reminders' },
-    { icon: MessageCircle, label: 'SMS', key: 'sms', active: activeComponent === 'sms' },
+    { 
+      icon: MessageCircle, 
+      label: 'SMS',
+      key: 'sms',
+      active: activeComponent === ('sms'),
+      hasSubmenu: true,
+      submenu: [
+        { icon: History, label: 'SMS History', key: 'all-leads' },
+        
+        { 
+          icon: Settings, 
+          label: 'Config',
+          key: 'sms-config',
+          active: activeComponent === ('leads-config'),
+          hasSubmenu: true,
+          submenu: [
+            { icon: BellPlus, label: 'General Templates', key: 'general-templates' },
+            { icon: BellPlus, label: 'Bulk WhatsApp', key: 'bulk-whatsapp' },
+            { icon: BellPlus, label: 'SMS Settings', key: 'sms-settings' }
+            
+          ]
+        }
+      ]
+    },
     { 
       icon: BadgeQuestionMark, 
       label: 'Help',
@@ -426,8 +507,41 @@ const FitnessDashboard = () => {
         
       case 'master-workout-plans':
         return <MasterWorkoutPlan />;
-      
-      
+
+      //LEADS
+      case 'leads':
+      case 'all-leads':
+      case 'add-leads':
+      case 'leads-config':
+        case 'leads-categories':
+          return <Lead_Categories />;
+        case 'follow-ups-types':
+          return <FollowUpsTypes />;
+        case 'sources':
+          return <Sources />;
+        case 'status':
+          return <Status />;
+
+      //SMS
+      case 'sms':
+      case 'sms-history':
+        case 'general-templates':
+          return <General_templates />;
+        case 'bulk-whatsapp':
+          return <Bulk_whatsapp />;
+        case 'sms-settings':
+          return <Sms_settings />;
+        
+
+      //STAFFS
+      case 'staff':
+      case 'all-staff':
+      case 'add-staff':
+      case 'attendance':
+      case 'staff-config':
+        case 'staff-types':
+          return <Staff_Types />;
+        
 
 
       default:
