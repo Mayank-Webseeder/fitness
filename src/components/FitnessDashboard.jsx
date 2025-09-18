@@ -101,6 +101,8 @@ import Staff_Types from './Staff/Staff_Types';
 import General_templates from './SMS/General_templates';
 import Bulk_whatsapp from './SMS/Bulk_whatsapp';
 import Sms_settings from './SMS/Sms_settings';
+import Add_members from './Member/Add_members';
+import All_members from './Member/All_members';
 
 
 const FitnessDashboard = () => {
@@ -116,23 +118,25 @@ const FitnessDashboard = () => {
 
   // Static data for the dashboard stats section
   const stats = [
-    { title: 'Active Members', value: '100', change: '+100', color: 'from-blue-500 to-blue-600', icon: UserCheck },
-    { title: 'Plan Expiry', value: '100', change: '+100', color: 'from-red-500 to-red-600', icon: CalendarDays },
-    { title: 'Today Renewal', value: '100', change: '+100', color: 'from-green-500 to-green-600', icon: TrendingUp },
-    { title: 'Month Renewal', value: '100', change: '+100', color: 'from-purple-500 to-purple-600', icon: Activity },
-    { title: 'Pending Balance', value: '100', change: '+100', color: 'from-pink-500 to-pink-600', icon: DollarSign },
-    { title: 'Member Present', value: '100', change: '+100', color: 'from-emerald-500 to-emerald-600', icon: Users },
-    { title: 'Today Collection', value: '100', change: '+100', color: 'from-amber-500 to-amber-600', icon: Target },
-    { title: 'Week Collection', value: '100', change: '+100', color: 'from-orange-500 to-orange-600', icon: BarChart4 }
+    { title: 'Active Members', value: '100', color: 'from-blue-500 to-blue-600', icon: UserCheck },
+    
+    { title: 'Today Renewal', value: '100', color: 'from-green-500 to-green-600', icon: TrendingUp },
+    { title: 'Month Renewal', value: '100', color: 'from-purple-500 to-purple-600', icon: Activity },
+    { title: 'Pending Balance', value: '100', color: 'from-pink-500 to-pink-600', icon: DollarSign },
+    
+    { title: 'Today Collection', value: '100', color: 'from-amber-500 to-amber-600', icon: Target },
+    { title: 'Week Collection', value: '100', color: 'from-orange-500 to-orange-600', icon: BarChart4 }
   ];
 
   // Static data for birthdays and anniversaries
   const birthdayMembers = [
-    { name: 'Samprksha', message: 'Wish Samprksha Happy Birthday!', avatar: 'S', time: '2h ago' },
-    { name: 'Samprksha', message: 'Wish Samprksha Happy Birthday!', avatar: 'S', time: '3h ago' },
-    { name: 'Nidhi Raut', message: 'Wish Samprksha Happy Anniversary!', avatar: 'N', time: '5h ago' },
-    { name: 'Nidhi Raut', message: 'Wish Samprksha Happy Anniversary!', avatar: 'N', time: '1d ago' },
-    { name: 'Nidhi Raut', message: 'Wish Samprksha Happy Anniversary!', avatar: 'N', time: '2d ago' }
+    { name: 'Samprksha', message: 'Wish Samprksha Happy Birthday!', avatar: 'S', time: '23/09/2004' },
+    { name: 'Samprksha', message: 'Wish Samprksha Happy Birthday!', avatar: 'S', time: '23/09/2004' },
+     { name: 'Samprksha', message: 'Wish Samprksha Happy Birthday!', avatar: 'S', time: '23/09/2004' },
+    { name: 'Nidhi Raut', message: 'Wish Samprksha Happy Anniversary!', avatar: 'N', time: '5/01/2000' },
+    { name: 'Nidhi Raut', message: 'Wish Samprksha Happy Anniversary!', avatar: 'N', time: '5/01/2000' },
+     { name: 'Nidhi Raut', message: 'Wish Samprksha Happy Anniversary!', avatar: 'N', time: '5/01/2000' },
+    { name: 'Nidhi Raut', message: 'Wish Samprksha Happy Anniversary!', avatar: 'N', time: '5/01/2000' }
   ];
 
   // Static data for membership status
@@ -142,7 +146,9 @@ const FitnessDashboard = () => {
     { name: 'Siya', status: 'Membership 20-Jan-2025', avatar: 'S', type: 'expires' },
     { name: 'Tomy Roy', status: 'Membership 30-Jan-2025', avatar: 'T', type: 'expires' },
     { name: 'Kiran Dighe', status: 'Membership 20-Jan-2025', avatar: 'K', type: 'overdue' },
-    { name: 'Sanvi', status: 'Membership 20-Jan-2025', avatar: 'S', type: 'overdue' }
+    { name: 'Sanvi', status: 'Membership 20-Jan-2025', avatar: 'S', type: 'overdue' },
+    { name: 'Dipak', status: 'Membership 20-Jan-2025', avatar: 'D', type: 'overdue' },
+    { name: 'Sakshi', status: 'Membership 20-Jan-2025', avatar: 'S', type: 'overdue' }
   ];
 
   // Sidebar navigation items
@@ -152,9 +158,10 @@ const FitnessDashboard = () => {
       icon: Users, 
       label: 'Members',
       key: 'members',
-      active: activeComponent.startsWith('members'),
+      active: activeComponent === ('members'),
       hasSubmenu: true,
       submenu: [
+        { icon: Users, label: 'All Members', key: 'all-members' },
         { icon: UserPlus, label: 'Add Members', key: 'add-members' },
         { icon: UserCheck, label: 'Active Members', key: 'active-members' },
         { icon: UserX, label: 'Inactive Members', key: 'inactive-members' },
@@ -165,7 +172,7 @@ const FitnessDashboard = () => {
           icon: Settings, 
           label: 'Config',
           key: 'help-config',
-          active: activeComponent.startsWith('help-config'),
+          active: activeComponent === ('help-config'),
           hasSubmenu: true,
           submenu: [
             { icon: Boxes, label: 'Groups', key: 'groups' },
@@ -348,7 +355,7 @@ const FitnessDashboard = () => {
       icon: Phone, 
       label: 'Member App',
       key: 'member-app',
-      active: activeComponent.startsWith('member-app'),
+      active: activeComponent === ('member-app'),
       hasSubmenu: true,
       submenu: [
         { icon: BadgeIndianRupee, label: 'Payment Request', key: 'payment-request' },
@@ -422,7 +429,10 @@ const FitnessDashboard = () => {
   const renderActiveComponent = () => {
     switch(activeComponent) {
       case 'members':
+      case 'all-members':
+        return <All_members />;
       case 'add-members':
+        return <Add_members />;
       case 'active-members':
       case 'inactive-members':
       case 'feedback':
@@ -548,170 +558,137 @@ const FitnessDashboard = () => {
         return (
           <div>
             {/* Stats section */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-              {stats.map((stat, index) => {
-                const Icon = stat.icon;
-                return (
-                  <div key={index} className={`bg-white border-gray-200 shadow-lg rounded-2xl p-4 sm:p-6 border hover:border-opacity-50 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl`}>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center shadow-lg`}>
-                        <Icon className="w-6 h-6 text-white" />
-                      </div>
-                      <span className={`text-green-600 text-sm font-semibold`}>{stat.change}</span>
-                    </div>
-                    <div className="space-y-1">
-                      <h3 className={`text-2xl font-bold text-gray-800`}>{stat.value}</h3>
-                      <p className={`text-gray-600 text-sm font-medium`}>{stat.title}</p>
-                    </div>
-                  </div>
-                );
-              })}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+    {stats.map((stat, index) => {
+      const Icon = stat.icon;
+      return (
+        <div key={index} className="bg-white border-gray-200 shadow-lg rounded-2xl px-6 py-8 border flex align-middle justify-around  h-full">
+          <div className="flex items-center justify-between mb-4">
+            <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center shadow-lg`}>
+              <Icon className="w-6 h-6 text-white" />
             </div>
-            {/* Charts and Data */}
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-              {/* Collection vs Expense Donut Chart */}
-              <div className="xl:col-span-1">
-                <div className={`bg-white border-gray-200 shadow-lg rounded-2xl p-6 border`}>
-                  <h3 className={`text-lg font-bold mb-6 text-gray-800`}>Collection vs Expense</h3>
-                  <div className="relative">
-                    <div className="w-48 h-48 mx-auto relative">
-                      <svg className="w-full h-full" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="40" fill="transparent" stroke="#E5E7EB" strokeWidth="8" />
-                        <circle cx="50" cy="50" r="40" fill="transparent" stroke="url(#gradient1)" strokeWidth="8" strokeDasharray="188.4" strokeDashoffset="75.36" strokeLinecap="round" transform="rotate(-90 50 50)" />
-                        <circle cx="50" cy="50" r="40" fill="transparent" stroke="url(#gradient2)" strokeWidth="8" strokeDasharray="188.4" strokeDashoffset="125.6" strokeLinecap="round" transform="rotate(90 50 50)" />
-                        <defs>
-                          <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#10B981" />
-                            <stop offset="100%" stopColor="#34D399" />
-                          </linearGradient>
-                          <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#EF4444" />
-                            <stop offset="100%" stopColor="#F87171" />
-                          </linearGradient>
-                        </defs>
-                      </svg>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center">
-                          <div className={`text-2xl font-bold text-gray-800`}>₹7,000</div>
-                          <div className={`text-sm text-gray-600`}>Net</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-6 space-y-3">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          <div className="w-3 h-3 bg-gradient-to-r from-green-500 to-green-400 rounded-full"></div>
-                          <span className={`text-sm text-gray-700`}>Collection</span>
-                        </div>
-                        <span className={`text-sm font-semibold text-gray-800`}>₹10,000</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          <div className="w-3 h-3 bg-gradient-to-r from-red-500 to-red-400 rounded-full"></div>
-                          <span className={`text-sm text-gray-700`}>Expense</span>
-                        </div>
-                        <span className={`text-sm font-semibold text-gray-800`}>₹3,000</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Collection Trend Line Chart */}
-              <div className="xl:col-span-1">
-                <div className={`bg-white border-gray-200 shadow-lg rounded-2xl p-6 border`}>
-                  <h3 className={`text-lg font-bold mb-6 text-gray-800`}>Collection Trend</h3>
-                  <div className="h-64">
-                    <svg className="w-full h-full" viewBox="0 0 300 200">
+          </div>
+          <div className="space-y-1">
+            <h3 className="text-2xl font-bold text-gray-800">{stat.value}</h3>
+            <p className="text-gray-600 text-sm font-medium">{stat.title}</p>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+            {/* Dashboard Cards Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+  {/* Collection vs Expense Donut Chart */}
+  <div className="bg-white border-gray-200 shadow-lg rounded-2xl px-6 py-8 border flex flex-col justify-between h-full">
+    <h3 className="text-lg font-bold mb-6 text-gray-800 text-center">Collection vs Expense</h3>
+     <div className="relative">
+                  <div className="w-48 h-48 mx-auto relative">
+                    <svg className="w-full h-full" viewBox="0 0 100 100">
+                      <circle cx="50" cy="50" r="40" fill="transparent" stroke="#E5E7EB" strokeWidth="8" />
+                      <circle cx="50" cy="50" r="40" fill="transparent" stroke="url(#gradient1)" strokeWidth="8" strokeDasharray="188.4" strokeDashoffset="75.36" strokeLinecap="round" transform="rotate(-90 50 50)" />
+                      <circle cx="50" cy="50" r="40" fill="transparent" stroke="url(#gradient2)" strokeWidth="8" strokeDasharray="188.4" strokeDashoffset="125.6" strokeLinecap="round" transform="rotate(90 50 50)" />
                       <defs>
-                        <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.3" />
-                          <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.1" />
+                        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="#10B981" />
+                          <stop offset="100%" stopColor="#34D399" />
+                        </linearGradient>
+                        <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="#EF4444" />
+                          <stop offset="100%" stopColor="#F87171" />
                         </linearGradient>
                       </defs>
-                      <path d="M 0 180 L 50 160 L 100 140 L 150 120 L 200 100 L 250 80 L 300 60 L 300 200 L 0 200 Z" fill="url(#areaGradient)" />
-                      <path d="M 0 180 L 50 160 L 100 140 L 150 120 L 200 100 L 250 80 L 300 60" stroke="#3B82F6" strokeWidth="3" fill="none" strokeLinecap="round" />
-                      {[0, 50, 100, 150, 200, 250, 300].map((x, i) => (
-                        <circle key={i} cx={x} cy={180 - i * 20} r="4" fill="#3B82F6" />
-                      ))}
                     </svg>
-                  </div>
-                  <div className={`mt-4 flex justify-between text-sm text-gray-600`}>
-                    <span>22 Nov</span>
-                    <span>23 Nov</span>
-                    <span>24 Nov</span>
-                    <span>25 Nov</span>
-                  </div>
-                </div>
-              </div>
-              {/* Birthdays & Anniversaries List */}
-              <div className="xl:col-span-1">
-                <div className={`bg-white border-gray-200 shadow-lg rounded-2xl p-6 border`}>
-                  <h3 className={`text-lg font-bold mb-6 text-gray-800 flex items-center`}>
-                    <Gift className="w-5 h-5 mr-2" />
-                    Birthdays & Anniversaries
-                  </h3>
-                  <div className="space-y-3">
-                    {birthdayMembers.map((member, index) => (
-                      <div key={index} className={`flex items-center space-x-3 p-3 bg-gray-50 hover:bg-gray-100 rounded-xl transition-all duration-200`}>
-                        <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center shadow-md">
-                          <span className="text-sm font-bold text-white">{member.avatar}</span>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className={`text-sm font-semibold text-gray-800 truncate`}>{member.name}</p>
-                          <p className={`text-xs text-gray-600 truncate`}>{member.message}</p>
-                        </div>
-                        <span className={`text-xs text-gray-500`}>{member.time}</span>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-gray-800">₹7,000</div>
+                        <div className="text-sm text-gray-600">Net</div>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* Membership Status Lists */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className={`bg-white border-gray-200 shadow-lg rounded-2xl p-6 border`}>
-                <h3 className={`text-lg font-bold mb-6 text-gray-800`}>Membership Expires</h3>
-                <div className="space-y-3">
-                  {membershipData.filter(m => m.type === 'expires').map((member, index) => (
-                    <div key={index} className={`flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 rounded-xl transition-all duration-200`}>
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full flex items-center justify-center shadow-md">
-                          <span className="text-sm font-bold text-white">{member.avatar}</span>
-                        </div>
-                        <div>
-                          <p className={`text-sm font-semibold text-gray-800`}>{member.name}</p>
-                          <p className={`text-xs text-gray-600`}>{member.status}</p>
-                        </div>
-                      </div>
-                      <button className="px-3 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-xs rounded-lg transition-all duration-200 shadow-md hover:shadow-lg">
-                        Renew
-                      </button>
                     </div>
-                  ))}
-                </div>
-              </div>
-              <div className={`bg-white border-gray-200 shadow-lg rounded-2xl p-6 border`}>
-                <h3 className={`text-lg font-bold mb-6 text-gray-800`}>Membership Overdues</h3>
-                <div className="space-y-3">
-                  {membershipData.filter(m => m.type === 'overdue').map((member, index) => (
-                    <div key={index} className={`flex items-center justify-between p-4 bg-gradient-to-r from-red-50 to-pink-50 hover:from-red-100 hover:to-pink-100 rounded-xl transition-all duration-200`}>
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-gradient-to-r from-red-500 to-pink-600 rounded-full flex items-center justify-center shadow-md">
-                          <span className="text-sm font-bold text-white">{member.avatar}</span>
-                        </div>
-                        <div>
-                          <p className={`text-sm font-semibold text-gray-800`}>{member.name}</p>
-                          <p className={`text-xs text-red-600`}>{member.status}</p>
-                        </div>
+                  </div>
+                  <div className="mt-6 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-3 h-3 bg-gradient-to-r from-green-500 to-green-400 rounded-full"></div>
+                        <span className="text-sm text-gray-700">Collection</span>
                       </div>
-                      <button className="px-3 py-1.5 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-xs rounded-lg transition-all duration-200 shadow-md hover:shadow-lg">
-                        Contact
-                      </button>
+                      <span className="text-sm font-semibold text-gray-800">₹10,000</span>
                     </div>
-                  ))}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-3 h-3 bg-gradient-to-r from-red-500 to-red-400 rounded-full"></div>
+                        <span className="text-sm text-gray-700">Expense</span>
+                      </div>
+                      <span className="text-sm font-semibold text-gray-800">₹3,000</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
+  </div>
+  {/* Birthdays & Anniversaries List with scroller */}
+  <div className="bg-white border-gray-200 shadow-lg rounded-2xl px-6 py-8 border flex flex-col justify-between h-full">
+    <h3 className="text-lg font-bold mb-6 text-gray-800 text-center">
+      
+      Birthdays & Anniversaries
+    </h3>
+    <div className="space-y-3 overflow-y-auto" style={{ maxHeight: '260px' }}>
+      {birthdayMembers.map((member, index) => (
+        <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 hover:bg-gray-100 rounded-xl transition-all duration-200">
+          <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center shadow-md">
+            <span className="text-sm font-bold text-white">{member.avatar}</span>
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold text-gray-800 truncate">{member.name}</p>
+            <p className="text-xs text-gray-600 truncate">{member.message}</p>
+          </div>
+          <span className="text-xs text-gray-500">{member.time}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+  {/* Membership Expires */}
+  <div className="bg-white border-gray-200 shadow-lg rounded-2xl px-6 py-8 border flex flex-col justify-between h-full">
+    <h3 className="text-lg font-bold mb-6 text-gray-800 text-center">Membership Expires</h3>
+    <div className="space-y-3">
+      {membershipData.filter(m => m.type === 'expires').map((member, index) => (
+        <div key={index} className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 rounded-xl transition-all duration-200">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full flex items-center justify-center shadow-md">
+              <span className="text-sm font-bold text-white">{member.avatar}</span>
             </div>
+            <div>
+              <p className="text-sm font-semibold text-gray-800">{member.name}</p>
+              <p className="text-xs text-gray-600">{member.status}</p>
+            </div>
+          </div>
+          <button className="px-3 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-xs rounded-lg transition-all duration-200 shadow-md hover:shadow-lg">
+            Renew
+          </button>
+        </div>
+      ))}
+    </div>
+  </div>
+  {/* Membership Overdues */}
+  <div className="bg-white border-gray-200 shadow-lg rounded-2xl px-6 py-8 border flex flex-col justify-between h-full">
+    <h3 className="text-lg font-bold mb-6 text-gray-800 text-center">Membership Overdues</h3>
+    <div className="space-y-3">
+      {membershipData.filter(m => m.type === 'overdue').map((member, index) => (
+        <div key={index} className="flex items-center justify-between p-4 bg-gradient-to-r from-red-50 to-pink-50 hover:from-red-100 hover:to-pink-100 rounded-xl transition-all duration-200">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-to-r from-red-500 to-pink-600 rounded-full flex items-center justify-center shadow-md">
+              <span className="text-sm font-bold text-white">{member.avatar}</span>
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-gray-800">{member.name}</p>
+              <p className="text-xs text-red-600">{member.status}</p>
+            </div>
+          </div>
+          <button className="px-3 py-1.5 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-xs rounded-lg transition-all duration-200 shadow-md hover:shadow-lg">
+            Contact
+          </button>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
           </div>
         );
     }
