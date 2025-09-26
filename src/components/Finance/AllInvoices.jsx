@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, Search, Download, Filter, TrendingUp, MoreVertical } from 'lucide-react';
+import { FileText, Search, Download, Filter, TrendingUp, MoreVertical, Circle } from 'lucide-react';
 
 const AllInvoices = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -57,7 +57,8 @@ const AllInvoices = () => {
   );
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    
+  <div className="p-6 bg-gray-50 min-h-screen">
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">
         <FileText className="w-6 h-6 text-gray-700" />
@@ -72,7 +73,6 @@ const AllInvoices = () => {
             <button className="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded-md hover:bg-gray-50">
               <Filter className="w-4 h-4 text-gray-600" />
             </button>
-            
             <div className="relative flex-1 max-w-md">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
               <input
@@ -84,7 +84,6 @@ const AllInvoices = () => {
               />
             </div>
           </div>
-
           {/* Right side - Export button */}
           <div className="flex items-center gap-3">
             <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm font-medium">
@@ -95,30 +94,35 @@ const AllInvoices = () => {
         </div>
       </div>
 
-      {/* Statistics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {statsData.map((stat, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-sm border-2 border-blue-400 overflow-hidden">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className={`p-3 rounded-full ${stat.bgColor}`}>
-                  {stat.icon}
-                </div>
-                <div className="text-right">
-                  <TrendingUp className="w-5 h-5 text-gray-400" />
-                </div>
-              </div>
-              <div className="space-y-1">
-                <p className="text-sm font-medium text-gray-600 uppercase tracking-wide">
-                  {stat.label}
-                </p>
-                <p className="text-3xl font-bold text-gray-900">
-                  {stat.value}
-                </p>
-              </div>
+      {/* Blocks Section */}
+      <div className="grid grid-cols-2 gap-6 mb-6">
+        {/* Invoices */}
+        <div className="bg-white border border-blue-300 rounded-lg p-5 flex items-center justify-between shadow-sm">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-full bg-pink-500 flex items-center justify-center">
+              <FileText className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <p className="text-sm text-gray-600 font-medium">INVOICES</p>
+              <h2 className="text-2xl font-bold text-gray-900">100</h2>
             </div>
           </div>
-        ))}
+          <TrendingUp className="h-5 w-5 text-gray-400" />
+        </div>
+
+        {/* Collection */}
+        <div className="bg-white border border-blue-300 rounded-lg p-5 flex items-center justify-between shadow-sm">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center">
+              <Circle className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <p className="text-sm text-gray-600 font-medium">COLLECTION</p>
+              <h2 className="text-2xl font-bold text-gray-900">₹30,000</h2>
+            </div>
+          </div>
+          <TrendingUp className="h-5 w-5 text-gray-400" />
+        </div>
       </div>
 
       {/* Invoices Table */}

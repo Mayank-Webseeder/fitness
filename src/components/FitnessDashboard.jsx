@@ -62,7 +62,17 @@ import {
   Boxes,
   Watch,
   ListRestart,
-  UserRoundPlus
+  UserRoundPlus,
+  AlarmClock,
+  FileCog,
+  SquareDashedKanban,
+  MessageSquarePlus,
+  FileUser,
+  SquareDashedMousePointer,
+  SquareCode,
+  ListChecks,
+  ChartBarStacked,
+  BookUser
 } from 'lucide-react';
 import Reports from './Reports';
 import AllMemberships from './Membership/AllMemberships';
@@ -71,6 +81,7 @@ import Sales from './Membership/Sales';
 import FreezeInfo from './Membership/FreezeInfo';
 import ConfigMaster from './Membership/ConfigMaster';
 import AllInvoices from './Finance/AllInvoices';
+import TodayInvoices from './Finance/TodayInvoices';
 import DaywiseCollection from './Finance/DaywiseCollection';
 import MonthwiseCollection from './Finance/MonthwiseCollection';
 import Expenses from './Finance/Expenses';
@@ -103,6 +114,19 @@ import Bulk_whatsapp from './SMS/Bulk_whatsapp';
 import Sms_settings from './SMS/Sms_settings';
 import Add_members from './Member/Add_members';
 import All_members from './Member/All_members';
+import All_leads from './Leads/All_leads';
+import Add_leads from './Leads/Add_leads';
+import Leads_followupshistory from './Leads/Leads_followupshistory';
+import Feedback from './Member/Feedback';
+import Follow_ups_history from './Member/Follow_ups_history';
+import Attendance from './Member/Attendance';
+import Add_staff from './Staff/Add_staff';
+import All_staff from './Staff/All_staff';
+import Staff_attendance from './Staff/Staff_attendance';
+import AllWorkoutPlan from './Workout/AllWorkoutPlan';
+import Sms_history from './SMS/Sms_history';
+import General_reminders from './Reminders/General_reminders';
+import ReminderCalendar from './Reminders/ReminderCalendar';
 
 
 const FitnessDashboard = () => {
@@ -163,8 +187,8 @@ const FitnessDashboard = () => {
       submenu: [
         { icon: Users, label: 'All Members', key: 'all-members' },
         { icon: UserPlus, label: 'Add Members', key: 'add-members' },
-        { icon: UserCheck, label: 'Active Members', key: 'active-members' },
-        { icon: UserX, label: 'Inactive Members', key: 'inactive-members' },
+        // { icon: UserCheck, label: 'Active Members', key: 'active-members' },
+        // { icon: UserX, label: 'Inactive Members', key: 'inactive-members' },
         { icon: MessageSquare, label: 'Feedback', key: 'feedback' },
         { icon: History, label: 'Follow Up History', key: 'follow-up-history' },
         { icon: CalendarDays, label: 'Attendance', key: 'attendance' },
@@ -269,7 +293,7 @@ const FitnessDashboard = () => {
       submenu: [
         { icon: Users, label: 'All Leads', key: 'all-leads' },
         { icon: UserRoundPlus, label: 'Add Leads', key: 'add-leads' },
-        { icon: ListRestart, label: 'Follow Ups History', key: 'follow-ups-history' },
+        { icon: ListRestart, label: 'Follow Ups History', key: 'leads-follow-ups-history' },
         { 
           icon: Settings, 
           label: 'Config',
@@ -277,10 +301,10 @@ const FitnessDashboard = () => {
           active: activeComponent === ('leads-config'),
           hasSubmenu: true,
           submenu: [
-            { icon: BellPlus, label: 'Categories', key: 'leads-categories' },
-            { icon: BellPlus, label: 'Follow Up Types', key: 'follow-ups-types' },
-            { icon: BellPlus, label: 'Sources', key: 'sources' },
-            { icon: BellPlus, label: 'Status', key: 'status' }
+            { icon: ChartBarStacked, label: 'Categories', key: 'leads-categories' },
+            { icon: ListChecks, label: 'Follow Up Types', key: 'follow-ups-types' },
+            { icon: SquareCode, label: 'Sources', key: 'sources' },
+            { icon: SquareDashedMousePointer, label: 'Status', key: 'status' }
           ]
         }
       ]
@@ -296,7 +320,7 @@ const FitnessDashboard = () => {
       submenu: [
         { icon: Users, label: 'All Staff', key: 'all-staff' },
         { icon: UserRoundPlus, label: 'Add Staff', key: 'add-staff' },
-        { icon: CalendarDays, label: 'Attendance', key: 'attendance' },
+        { icon: CalendarDays, label: 'Attendance', key: 'staff-attendance' },
         { 
           icon: Settings, 
           label: 'Config',
@@ -304,13 +328,26 @@ const FitnessDashboard = () => {
           active: activeComponent === ('staff-config'),
           hasSubmenu: true,
           submenu: [
-            { icon: BellPlus, label: 'Staff Types', key: 'staff-types' }
+            { icon: FileUser, label: 'Staff Types', key: 'staff-types' }
           ]
         }
       ]
     },
 
-    { icon: Building2, label: 'Reminders', key: 'reminders', active: activeComponent === 'reminders' },
+
+    {
+      icon: Building2, 
+      label: 'Reminders', 
+      key: 'reminders', 
+      active: activeComponent === ('reminders'),
+      hasSubmenu: true,
+      submenu: [
+        { icon:AlarmClock, label: 'General Reminders', key: 'general-reminder' },
+        { icon: CalendarDays, label: 'Calendar', key: 'calendar' }
+      
+      ]
+    },
+
     { 
       icon: MessageCircle, 
       label: 'SMS',
@@ -318,18 +355,18 @@ const FitnessDashboard = () => {
       active: activeComponent === ('sms'),
       hasSubmenu: true,
       submenu: [
-        { icon: History, label: 'SMS History', key: 'all-leads' },
+        { icon: History, label: 'SMS History', key: 'sms-history' },
         
         { 
           icon: Settings, 
           label: 'Config',
           key: 'sms-config',
-          active: activeComponent === ('leads-config'),
+          active: activeComponent === ('sms-config'),
           hasSubmenu: true,
           submenu: [
-            { icon: BellPlus, label: 'General Templates', key: 'general-templates' },
-            { icon: BellPlus, label: 'Bulk WhatsApp', key: 'bulk-whatsapp' },
-            { icon: BellPlus, label: 'SMS Settings', key: 'sms-settings' }
+            { icon: SquareDashedKanban, label: 'General Templates', key: 'general-templates' },
+            { icon: MessageSquarePlus, label: 'Bulk WhatsApp', key: 'bulk-whatsapp' },
+            { icon: FileCog, label: 'SMS Settings', key: 'sms-settings' }
             
           ]
         }
@@ -352,7 +389,7 @@ const FitnessDashboard = () => {
     },
     { icon: Phone, label: 'Contact Us', key: 'contact-us', active: activeComponent === 'contact-us' },
     { 
-      icon: Phone, 
+      icon: BookUser, 
       label: 'Member App',
       key: 'member-app',
       active: activeComponent === ('member-app'),
@@ -433,11 +470,14 @@ const FitnessDashboard = () => {
         return <All_members />;
       case 'add-members':
         return <Add_members />;
-      case 'active-members':
-      case 'inactive-members':
+      // case 'active-members':
+      // case 'inactive-members':
       case 'feedback':
+        return <Feedback/>;
       case 'follow-up-history':
+        return <Follow_ups_history/>;
       case 'attendance':
+        return <Attendance/>
       case 'config':
       case 'groups':
         return <Groups />;
@@ -464,7 +504,7 @@ const FitnessDashboard = () => {
       case 'all-invoices':
         return <AllInvoices />;
       case 'today-invoices':
-        return <AllInvoices />;
+        return <TodayInvoices />;
       case 'daywise-collection':
         return <DaywiseCollection />;
       case 'monthwise-collection':
@@ -513,6 +553,7 @@ const FitnessDashboard = () => {
       //WORKOUT
       case 'Workout':
       case 'all-workout-plans':
+        return <AllWorkoutPlan/>
       case 'workout-config':
         
       case 'master-workout-plans':
@@ -521,7 +562,11 @@ const FitnessDashboard = () => {
       //LEADS
       case 'leads':
       case 'all-leads':
+        return <All_leads/>;
       case 'add-leads':
+        return <Add_leads/>
+      case 'leads-follow-ups-history':
+        return <Leads_followupshistory/>
       case 'leads-config':
         case 'leads-categories':
           return <Lead_Categories />;
@@ -535,6 +580,7 @@ const FitnessDashboard = () => {
       //SMS
       case 'sms':
       case 'sms-history':
+        return <Sms_history/>;
         case 'general-templates':
           return <General_templates />;
         case 'bulk-whatsapp':
@@ -546,11 +592,21 @@ const FitnessDashboard = () => {
       //STAFFS
       case 'staff':
       case 'all-staff':
+        return <All_staff/>;
       case 'add-staff':
-      case 'attendance':
+        return <Add_staff/>
+      case 'staff-attendance':
+        return <Staff_attendance/>
       case 'staff-config':
         case 'staff-types':
           return <Staff_Types />;
+
+      //REMINDERS
+      case 'reminders':
+      case 'general-reminder':
+        return<General_reminders/>
+      case 'calendar':
+        return <ReminderCalendar/>;
         
 
 
