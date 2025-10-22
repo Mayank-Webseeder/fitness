@@ -11,17 +11,17 @@ import {
 
 const Follow_ups_history = () => {
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div>
       {/* Header */}
       <header className="bg-white border-b border-gray-200 mt-0 px-4 py-3 flex items-center shadow-sm mb-6 rounded-md">
-        <h1 className="text-xl font-bold text-gray-800 flex items-center font-sans gap-2">
-          <History />
+        <h1 className=" font-bold text-gray-800 flex items-center font-sans gap-2">
+          <History size={20}/>
           Follow Ups History
         </h1>
       </header>
 
       {/* Top Bar */}
-      <div className="flex items-center gap-3 mb-6 bg-white shadow-md p-3 rounded-xl">
+      <div className="flex items-center gap-3 mb-6 bg-white shadow-md p-3  rounded-xl">
         {/* Filter Button */}
         <button className="p-2 rounded-lg border border-gray-300 hover:bg-gray-100">
           <Filter size={20} />
@@ -37,11 +37,7 @@ const Follow_ups_history = () => {
           />
         </div>
 
-        {/* Messages Button */}
-        <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">
-          <MessageSquare size={18} />
-          <span className="text-sm font-medium">Messages</span>
-        </button>
+        
 
         {/* Export Button */}
         <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
@@ -53,24 +49,28 @@ const Follow_ups_history = () => {
       {/* Stats Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {/* Members Card */}
-        <div className="flex items-center gap-4 bg-white shadow-md p-6 rounded-2xl">
+        <div className="flex justify-between gap-4 bg-white shadow-md p-6 rounded-2xl">
+          
+          <div>
+            <p className="text-gray-500 text-sm">Follow-ups</p>
+            <h2 className="text-2xl font-bold">100</h2>
+            
+          </div>
           <div className="p-3 bg-blue-500 text-white rounded-xl">
             <Users size={28} />
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold">100</h2>
-            <p className="text-gray-500 text-sm">Follow-ups</p>
-          </div>
+          </div>  
         </div>
 
         {/* Balance Card */}
-        <div className="flex items-center gap-4 bg-white shadow-md p-6 rounded-2xl">
+        <div className="flex justify-between gap-4 bg-white shadow-md p-6 rounded-2xl">
+          
+          <div>
+            <p className="text-gray-500 text-sm">Members</p>
+            <h2 className="text-2xl font-bold">40</h2>
+            
+          </div>
           <div className="p-3 bg-green-500 text-white rounded-xl">
             <CheckCircle size={28} />
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold">40</h2>
-            <p className="text-gray-500 text-sm">Members</p>
           </div>
         </div>
       </div>

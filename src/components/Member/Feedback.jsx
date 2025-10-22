@@ -9,11 +9,11 @@ import {
 
 const Feedback = () => {
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div>
       {/* Header */}
       <header className="bg-white border-b border-gray-200 mt-0 px-4 py-3 flex items-center shadow-sm mb-6 rounded-md">
-        <h1 className="text-xl font-bold text-gray-800 flex items-center font-sans gap-2">
-          <MessageSquare />
+        <h1 className=" font-bold text-gray-800 flex items-center font-sans gap-2">
+          <MessageSquare size={20} />
           Feedback
         </h1>
       </header>

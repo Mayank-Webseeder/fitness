@@ -11,11 +11,11 @@ import {
 
 const Attendance = () => {
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div>
       {/* Header */}
       <header className="bg-white border-b border-gray-200 mt-0 px-4 py-3 flex items-center shadow-sm mb-6 rounded-md">
-        <h1 className="text-xl font-bold text-gray-800 flex items-center font-sans gap-2">
-          <CalendarDays />
+        <h1 className=" font-bold text-gray-800 flex items-center font-sans gap-2">
+          <CalendarDays size={20} />
           Attendance
         </h1>
       </header>
@@ -38,10 +38,10 @@ const Attendance = () => {
         </div>
 
         {/* Messages Button */}
-        <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">
+        {/* <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">
           <MessageSquare size={18} />
           <span className="text-sm font-medium">Messages</span>
-        </button>
+        </button> */}
 
         {/* Export Button */}
         <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
@@ -53,24 +53,28 @@ const Attendance = () => {
       {/* Stats Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {/* Members Card */}
-        <div className="flex items-center gap-4 bg-white shadow-md p-6 rounded-2xl">
+        <div className="flex justify-between gap-4 bg-white shadow-md p-6 rounded-2xl">
+          
+          <div>
+            <p className="text-gray-500 text-sm">Members</p>
+            <h2 className="text-2xl font-bold">80</h2>
+            
+          </div>
           <div className="p-3 bg-blue-500 text-white rounded-xl">
             <Users size={28} />
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold">80</h2>
-            <p className="text-gray-500 text-sm">Members</p>
           </div>
         </div>
 
         {/* Balance Card */}
-        <div className="flex items-center gap-4 bg-white shadow-md p-6 rounded-2xl">
+        <div className="flex justify-between gap-4 bg-white shadow-md p-6 rounded-2xl">
+          
+          <div>
+            <p className="text-gray-500 text-sm">Logs</p>
+            <h2 className="text-2xl font-bold">64</h2>
+            
+          </div>
           <div className="p-3 bg-green-500 text-white rounded-xl">
             <CheckCircle size={28} />
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold">64</h2>
-            <p className="text-gray-500 text-sm">Logs</p>
           </div>
         </div>
       </div>

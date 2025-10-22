@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Download, TrendingUp } from 'lucide-react';
+import { Search, Download, FileText, PieChart } from 'lucide-react';
 
 const Summary = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -77,11 +77,10 @@ const Summary = () => {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-200">
-        <div className="flex items-center gap-2">
-          <TrendingUp className="w-5 h-5 text-gray-600" />
-          <h1 className="text-lg font-semibold text-gray-900">Finance Summary</h1>
-        </div>
+      <div className="bg-white border-b border-gray-200 mt-0 px-4 py-3 flex items-center shadow-sm">
+        <h1 className=" font-bold text-gray-800 flex items-center font-sans gap-2 ">
+          <PieChart /> Finance Summary
+        </h1>
       </div>
 
       {/* Controls */}

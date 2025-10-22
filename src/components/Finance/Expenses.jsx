@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Download, Trash2, Plus, Edit2, Trash } from 'lucide-react';
+import { Search, Download, Trash2, Plus, Edit2, Trash, FileText, MinusCircle } from 'lucide-react';
 
 const Expenses = () => {
   const [expenses, setExpenses] = useState([
@@ -24,8 +24,8 @@ const Expenses = () => {
   };
 
   const handleSelectExpense = (expenseId) => {
-    setSelectedExpenses(prev => 
-      prev.includes(expenseId) 
+    setSelectedExpenses(prev =>
+      prev.includes(expenseId)
         ? prev.filter(id => id !== expenseId)
         : [...prev, expenseId]
     );
@@ -46,13 +46,10 @@ const Expenses = () => {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-200">
-        <div className="flex items-center gap-2">
-          <div className="p-2 bg-gray-100 rounded">
-            <div className="w-4 h-4 border-2 border-gray-600 rounded-sm"></div>
-          </div>
-          <h1 className="text-lg font-semibold text-gray-900">Expenses</h1>
-        </div>
+      <div className="bg-white border-b border-gray-200 mt-0 px-4 py-3 flex items-center shadow-sm">
+        <h1 className="font-bold text-gray-800 flex items-center font-sans gap-2">
+          <MinusCircle/> Expenses
+        </h1>
       </div>
 
       {/* Controls */}
@@ -60,7 +57,7 @@ const Expenses = () => {
         <div className="flex items-center gap-3">
           <button className="p-2 hover:bg-gray-100 rounded">
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M6 9l6 6 6-6"/>
+              <path d="M6 9l6 6 6-6" />
             </svg>
           </button>
           <div className="relative">
@@ -74,7 +71,7 @@ const Expenses = () => {
             />
           </div>
         </div>
-        
+
         <div className="flex items-center gap-2">
           <button className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md">
             <Download className="w-4 h-4" />
@@ -91,74 +88,65 @@ const Expenses = () => {
         </div>
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-gray-100">
-              <th className="text-left p-4 w-12">
+      {/* Redesigned Table Layout */}
+      <div className="p-4">
+        <div className="overflow-hidden rounded-lg border border-gray-200">
+          <div className="grid grid-cols-5 bg-gray-50 text-sm font-medium text-gray-700 px-4 py-2 border-b border-b-gray-300">
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={selectedExpenses.length === expenses.length}
+                onChange={handleSelectAll}
+                className="rounded border-gray-300"
+              />
+              Description
+            </div>
+            <div>Date</div>
+            <div>By</div>
+            <div>Amount</div>
+            <div className="text-center">Actions</div>
+          </div>
+
+          {filteredExpenses.map((expense) => (
+            <div
+              key={expense.id}
+              className="grid grid-cols-5 items-center px-4 py-3 border-b border-b-gray-300 hover:bg-gray-50 transition"
+            >
+              <div className="flex items-center gap-2">
                 <input
                   type="checkbox"
-                  checked={selectedExpenses.length === expenses.length}
-                  onChange={handleSelectAll}
+                  checked={selectedExpenses.includes(expense.id)}
+                  onChange={() => handleSelectExpense(expense.id)}
                   className="rounded border-gray-300"
                 />
-              </th>
-              <th className="text-left p-4 text-sm font-medium text-gray-700">Description</th>
-              <th className="text-left p-4 text-sm font-medium text-gray-700">Date</th>
-              <th className="text-left p-4 text-sm font-medium text-gray-700">By</th>
-              <th className="text-left p-4 text-sm font-medium text-gray-700">Amount</th>
-              <th className="text-left p-4 w-16"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredExpenses.map((expense) => (
-              <tr key={expense.id} className="border-b border-gray-50 hover:bg-gray-50">
-                <td className="p-4">
-                  <input
-                    type="checkbox"
-                    checked={selectedExpenses.includes(expense.id)}
-                    onChange={() => handleSelectExpense(expense.id)}
-                    className="rounded border-gray-300"
-                  />
-                </td>
-                <td className="p-4 text-sm text-gray-900">{expense.description}</td>
-                <td className="p-4 text-sm text-gray-600">{expense.date}</td>
-                <td className="p-4 text-sm text-gray-600">{expense.by}</td>
-                <td className="p-4 text-sm text-gray-900">{expense.amount}</td>
-                <td className="p-4">
-                  <div className="flex items-center gap-1">
-                    <button className="p-1 text-gray-400 hover:text-gray-600">
-                      <Edit2 className="w-4 h-4" />
-                    </button>
-                    <button className="p-1 text-gray-400 hover:text-red-600">
-                      <Trash className="w-4 h-4" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-            
-            {/* Total Row */}
-            <tr className="border-b-2 border-gray-200 bg-gray-50">
-              <td className="p-4"></td>
-              <td className="p-4"></td>
-              <td className="p-4"></td>
-              <td className="p-4 text-sm font-medium text-gray-700">TOTAL</td>
-              <td className="p-4 text-sm font-semibold text-red-600">₹{calculateTotal().toLocaleString()}</td>
-              <td className="p-4">
-                <div className="flex items-center gap-1">
-                  <button className="p-1 text-gray-400 hover:text-gray-600">
-                    <Edit2 className="w-4 h-4" />
-                  </button>
-                  <button className="p-1 text-gray-400 hover:text-red-600">
-                    <Trash className="w-4 h-4" />
-                  </button>
+                <div>
+                  <p className="text-gray-900 text-sm font-medium">{expense.description}</p>
                 </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+              <p className="text-gray-600 text-sm">{expense.date}</p>
+              <p className="text-gray-600 text-sm">{expense.by}</p>
+              <p className="text-gray-900 text-sm font-semibold">{expense.amount}</p>
+              <div className="flex justify-center gap-2">
+                <button className="p-1 text-gray-400 hover:text-gray-600">
+                  <Edit2 className="w-4 h-4" />
+                </button>
+                <button className="p-1 text-gray-400 hover:text-red-600">
+                  <Trash className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          ))}
+
+          {/* Total Row */}
+          <div className="grid grid-cols-5 bg-gray-50 font-medium px-4 py-3 border-t">
+            <div></div>
+            <div></div>
+            <div className="text-right text-gray-700 col-span-2">TOTAL</div>
+            <div className="text-green-600 font-semibold">
+              ₹{calculateTotal().toLocaleString()}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

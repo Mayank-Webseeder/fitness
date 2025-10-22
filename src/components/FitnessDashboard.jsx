@@ -128,12 +128,19 @@ import Sms_history from './SMS/Sms_history';
 import General_reminders from './Reminders/General_reminders';
 import ReminderCalendar from './Reminders/ReminderCalendar';
 
-
 const FitnessDashboard = () => {
   // State for sidebar visibility and menu expansion
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [expandedMenus, setExpandedMenus] = useState({});
   const [activeComponent, setActiveComponent] = useState('dashboard');
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  // Example notifications
+  const notifications = [
+    { id: 1, text: "Samruddhi's membership expires soon.", time: "2 min ago" },
+    { id: 2, text: "New member added: Nikhil.", time: "10 min ago" },
+    { id: 3, text: "Payment received from Siya.", time: "1 hour ago" },
+  ];
 
   // Function to toggle submenus in the sidebar
   const toggleSubmenu = (key) => {
@@ -143,11 +150,9 @@ const FitnessDashboard = () => {
   // Static data for the dashboard stats section
   const stats = [
     { title: 'Active Members', value: '100', color: 'from-blue-500 to-blue-600', icon: UserCheck },
-    
     { title: 'Today Renewal', value: '100', color: 'from-green-500 to-green-600', icon: TrendingUp },
     { title: 'Month Renewal', value: '100', color: 'from-purple-500 to-purple-600', icon: Activity },
     { title: 'Pending Balance', value: '100', color: 'from-pink-500 to-pink-600', icon: DollarSign },
-    
     { title: 'Today Collection', value: '100', color: 'from-amber-500 to-amber-600', icon: Target },
     { title: 'Week Collection', value: '100', color: 'from-orange-500 to-orange-600', icon: BarChart4 }
   ];
@@ -156,10 +161,10 @@ const FitnessDashboard = () => {
   const birthdayMembers = [
     { name: 'Samprksha', message: 'Wish Samprksha Happy Birthday!', avatar: 'S', time: '23/09/2004' },
     { name: 'Samprksha', message: 'Wish Samprksha Happy Birthday!', avatar: 'S', time: '23/09/2004' },
-     { name: 'Samprksha', message: 'Wish Samprksha Happy Birthday!', avatar: 'S', time: '23/09/2004' },
+    { name: 'Samprksha', message: 'Wish Samprksha Happy Birthday!', avatar: 'S', time: '23/09/2004' },
     { name: 'Nidhi Raut', message: 'Wish Samprksha Happy Anniversary!', avatar: 'N', time: '5/01/2000' },
     { name: 'Nidhi Raut', message: 'Wish Samprksha Happy Anniversary!', avatar: 'N', time: '5/01/2000' },
-     { name: 'Nidhi Raut', message: 'Wish Samprksha Happy Anniversary!', avatar: 'N', time: '5/01/2000' },
+    { name: 'Nidhi Raut', message: 'Wish Samprksha Happy Anniversary!', avatar: 'N', time: '5/01/2000' },
     { name: 'Nidhi Raut', message: 'Wish Samprksha Happy Anniversary!', avatar: 'N', time: '5/01/2000' }
   ];
 
@@ -186,9 +191,6 @@ const FitnessDashboard = () => {
       hasSubmenu: true,
       submenu: [
         { icon: Users, label: 'All Members', key: 'all-members' },
-        { icon: UserPlus, label: 'Add Members', key: 'add-members' },
-        // { icon: UserCheck, label: 'Active Members', key: 'active-members' },
-        // { icon: UserX, label: 'Inactive Members', key: 'inactive-members' },
         { icon: MessageSquare, label: 'Feedback', key: 'feedback' },
         { icon: History, label: 'Follow Up History', key: 'follow-up-history' },
         { icon: CalendarDays, label: 'Attendance', key: 'attendance' },
@@ -248,7 +250,6 @@ const FitnessDashboard = () => {
         { icon: Settings, label: 'Config', key: 'config-diet' }
       ]
     },
-    
     { 
       icon: Zap, 
       label: 'Workout',
@@ -269,8 +270,6 @@ const FitnessDashboard = () => {
         }
       ]
     },
-
-
     {
       icon: LineChart, 
       label: 'Business Insights', 
@@ -279,11 +278,8 @@ const FitnessDashboard = () => {
       hasSubmenu: true,
       submenu: [
         { icon: Star, label: 'Dashboard', key: 'business-insights-dashboard' }
-      
       ]
     },
-
-
     { 
       icon: Users, 
       label: 'Leads',
@@ -292,7 +288,7 @@ const FitnessDashboard = () => {
       hasSubmenu: true,
       submenu: [
         { icon: Users, label: 'All Leads', key: 'all-leads' },
-        { icon: UserRoundPlus, label: 'Add Leads', key: 'add-leads' },
+        // { icon: UserRoundPlus, label: 'Add Leads', key: 'add-leads' },
         { icon: ListRestart, label: 'Follow Ups History', key: 'leads-follow-ups-history' },
         { 
           icon: Settings, 
@@ -309,8 +305,6 @@ const FitnessDashboard = () => {
         }
       ]
     },
-
-
     { 
       icon: UserSquare, 
       label: 'Staff',
@@ -333,8 +327,6 @@ const FitnessDashboard = () => {
         }
       ]
     },
-
-
     {
       icon: Building2, 
       label: 'Reminders', 
@@ -344,10 +336,8 @@ const FitnessDashboard = () => {
       submenu: [
         { icon:AlarmClock, label: 'General Reminders', key: 'general-reminder' },
         { icon: CalendarDays, label: 'Calendar', key: 'calendar' }
-      
       ]
     },
-
     { 
       icon: MessageCircle, 
       label: 'SMS',
@@ -356,7 +346,6 @@ const FitnessDashboard = () => {
       hasSubmenu: true,
       submenu: [
         { icon: History, label: 'SMS History', key: 'sms-history' },
-        
         { 
           icon: Settings, 
           label: 'Config',
@@ -367,7 +356,6 @@ const FitnessDashboard = () => {
             { icon: SquareDashedKanban, label: 'General Templates', key: 'general-templates' },
             { icon: MessageSquarePlus, label: 'Bulk WhatsApp', key: 'bulk-whatsapp' },
             { icon: FileCog, label: 'SMS Settings', key: 'sms-settings' }
-            
           ]
         }
       ]
@@ -445,7 +433,6 @@ const FitnessDashboard = () => {
             </div>
           )}
         </div>
-        
         {item.hasSubmenu && isExpanded && (
           <div className="ml-4 mt-2 space-y-1 border-l-2 border-gray-300 pl-4">
             {item.submenu.map((subItem, subIndex) => (
@@ -468,10 +455,6 @@ const FitnessDashboard = () => {
       case 'members':
       case 'all-members':
         return <All_members />;
-      case 'add-members':
-        return <Add_members />;
-      // case 'active-members':
-      // case 'inactive-members':
       case 'feedback':
         return <Feedback/>;
       case 'follow-up-history':
@@ -485,11 +468,8 @@ const FitnessDashboard = () => {
         return <FollowUpTypes />;
       case 'categories':
         return <Categories />;
-
-        return <MembersComponent activeTab={activeComponent} />;
       case 'reports':
         return <Reports />;
-      //MEMBERSHIPS
       case 'all-membership':
         return <AllMemberships />;
       case 'pending-balance':
@@ -500,7 +480,6 @@ const FitnessDashboard = () => {
         return <FreezeInfo />;
       case 'config-master':
         return <ConfigMaster />;
-      //FINANCES
       case 'all-invoices':
         return <AllInvoices />;
       case 'today-invoices':
@@ -515,12 +494,10 @@ const FitnessDashboard = () => {
         return <Summary />;
       case 'config-payment':
         return <ConfigPayment />;
-      //DIETS
       case 'all-diet-plans':
         return <AllDietPlans />;
       case 'config-diet':
         return <ConfigDiet />;
-      //HELP
       case 'help':
       case 'versions':
         return <Versions />;
@@ -534,13 +511,9 @@ const FitnessDashboard = () => {
         return <Article />;
       case 'track-your-suggestions':
         return <TrackYourSuggestions />;
-      
-      //BUSINESS INSIGHTS
-        case 'business-insights':
-          case 'business-insights-dashboard':
-          return <Bi_dashboard />;
-
-      //MEMBER APP
+      case 'business-insights':
+      case 'business-insights-dashboard':
+        return <Bi_dashboard />;
       case 'member-app':
       case 'payment-request':
         return <PaymentRequest />;
@@ -550,16 +523,12 @@ const FitnessDashboard = () => {
         return <Paymentgateway />;
       case 'push-notifications':
         return <PushNotification />;
-      //WORKOUT
       case 'Workout':
       case 'all-workout-plans':
         return <AllWorkoutPlan/>
       case 'workout-config':
-        
       case 'master-workout-plans':
         return <MasterWorkoutPlan />;
-
-      //LEADS
       case 'leads':
       case 'all-leads':
         return <All_leads/>;
@@ -568,28 +537,23 @@ const FitnessDashboard = () => {
       case 'leads-follow-ups-history':
         return <Leads_followupshistory/>
       case 'leads-config':
-        case 'leads-categories':
-          return <Lead_Categories />;
-        case 'follow-ups-types':
-          return <FollowUpsTypes />;
-        case 'sources':
-          return <Sources />;
-        case 'status':
-          return <Status />;
-
-      //SMS
+      case 'leads-categories':
+        return <Lead_Categories />;
+      case 'follow-ups-types':
+        return <FollowUpsTypes />;
+      case 'sources':
+        return <Sources />;
+      case 'status':
+        return <Status />;
       case 'sms':
       case 'sms-history':
         return <Sms_history/>;
-        case 'general-templates':
-          return <General_templates />;
-        case 'bulk-whatsapp':
-          return <Bulk_whatsapp />;
-        case 'sms-settings':
-          return <Sms_settings />;
-        
-
-      //STAFFS
+      case 'general-templates':
+        return <General_templates />;
+      case 'bulk-whatsapp':
+        return <Bulk_whatsapp />;
+      case 'sms-settings':
+        return <Sms_settings />;
       case 'staff':
       case 'all-staff':
         return <All_staff/>;
@@ -598,46 +562,42 @@ const FitnessDashboard = () => {
       case 'staff-attendance':
         return <Staff_attendance/>
       case 'staff-config':
-        case 'staff-types':
-          return <Staff_Types />;
-
-      //REMINDERS
+      case 'staff-types':
+        return <Staff_Types />;
       case 'reminders':
       case 'general-reminder':
         return<General_reminders/>
       case 'calendar':
         return <ReminderCalendar/>;
-        
-
-
       default:
         return (
           <div>
             {/* Stats section */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-    {stats.map((stat, index) => {
-      const Icon = stat.icon;
-      return (
-        <div key={index} className="bg-white border-gray-200 shadow-lg rounded-2xl px-6 py-8 border flex align-middle justify-around  h-full">
-          <div className="flex items-center justify-between mb-4">
-            <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center shadow-lg`}>
-              <Icon className="w-6 h-6 text-white" />
+            <div className='pt-6'></div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 px-4">
+              {stats.map((stat, index) => {
+                const Icon = stat.icon;
+                return (
+                  <div key={index} className="bg-white border-gray-200 shadow-lg rounded-2xl px-6 py-8 border flex align-middle justify-around  h-full">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center shadow-lg`}>
+                        <Icon className="w-6 h-6 text-white" />
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="text-2xl font-bold text-gray-800">{stat.value}</h3>
+                      <p className="text-gray-600 text-sm font-medium">{stat.title}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          </div>
-          <div className="space-y-1">
-            <h3 className="text-2xl font-bold text-gray-800">{stat.value}</h3>
-            <p className="text-gray-600 text-sm font-medium">{stat.title}</p>
-          </div>
-        </div>
-      );
-    })}
-  </div>
             {/* Dashboard Cards Section */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-  {/* Collection vs Expense Donut Chart */}
-  <div className="bg-white border-gray-200 shadow-lg rounded-2xl px-6 py-8 border flex flex-col justify-between h-full">
-    <h3 className="text-lg font-bold mb-6 text-gray-800 text-center">Collection vs Expense</h3>
-     <div className="relative">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6 px-4 ">
+              {/* Collection vs Expense Donut Chart */}
+              <div className="bg-white border-gray-200 shadow-lg rounded-2xl px-6 py-8 border flex flex-col justify-between h-full ">
+                <h3 className="text-lg font-bold mb-6 text-gray-800 text-center">Collection vs Expense</h3>
+                <div className="relative">
                   <div className="w-48 h-48 mx-auto relative">
                     <svg className="w-full h-full" viewBox="0 0 100 100">
                       <circle cx="50" cy="50" r="40" fill="transparent" stroke="#E5E7EB" strokeWidth="8" />
@@ -678,73 +638,73 @@ const FitnessDashboard = () => {
                     </div>
                   </div>
                 </div>
-  </div>
-  {/* Birthdays & Anniversaries List with scroller */}
-  <div className="bg-white border-gray-200 shadow-lg rounded-2xl px-6 py-8 border flex flex-col justify-between h-full">
-    <h3 className="text-lg font-bold mb-6 text-gray-800 text-center">
-      
-      Birthdays & Anniversaries
-    </h3>
-    <div className="space-y-3 overflow-y-auto" style={{ maxHeight: '260px' }}>
-      {birthdayMembers.map((member, index) => (
-        <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 hover:bg-gray-100 rounded-xl transition-all duration-200">
-          <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center shadow-md">
-            <span className="text-sm font-bold text-white">{member.avatar}</span>
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold text-gray-800 truncate">{member.name}</p>
-            <p className="text-xs text-gray-600 truncate">{member.message}</p>
-          </div>
-          <span className="text-xs text-gray-500">{member.time}</span>
-        </div>
-      ))}
-    </div>
-  </div>
-  {/* Membership Expires */}
-  <div className="bg-white border-gray-200 shadow-lg rounded-2xl px-6 py-8 border flex flex-col justify-between h-full">
-    <h3 className="text-lg font-bold mb-6 text-gray-800 text-center">Membership Expires</h3>
-    <div className="space-y-3">
-      {membershipData.filter(m => m.type === 'expires').map((member, index) => (
-        <div key={index} className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 rounded-xl transition-all duration-200">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full flex items-center justify-center shadow-md">
-              <span className="text-sm font-bold text-white">{member.avatar}</span>
+              </div>
+              {/* Birthdays & Anniversaries List with scroller */}
+              <div className="bg-white border-gray-200 shadow-lg rounded-2xl px-6 py-8 border flex flex-col justify-between h-full">
+                <h3 className="text-lg font-bold mb-6 text-gray-800 text-center">
+                  Birthdays & Anniversaries
+                </h3>
+                <div className="space-y-3 overflow-y-auto" style={{ maxHeight: '260px' }}>
+                  {birthdayMembers.map((member, index) => (
+                    <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 hover:bg-gray-100 rounded-xl transition-all duration-200">
+                      <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center shadow-md">
+                        <span className="text-sm font-bold text-white">{member.avatar}</span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-gray-800 truncate">{member.name}</p>
+                        <p className="text-xs text-gray-600 truncate">{member.message}</p>
+                      </div>
+                      <span className="text-xs text-gray-500">{member.time}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* Membership Expires */}
+              <div className="bg-white border-gray-200 shadow-lg rounded-2xl px-6 py-8 border flex flex-col justify-between h-full">
+                <h3 className="text-lg font-bold mb-6 text-gray-800 text-center">Membership Expires</h3>
+                <div className="space-y-3">
+                  {membershipData.filter(m => m.type === 'expires').map((member, index) => (
+                    <div key={index} className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 rounded-xl transition-all duration-200">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full flex items-center justify-center shadow-md">
+                          <span className="text-sm font-bold text-white">{member.avatar}</span>
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-gray-800">{member.name}</p>
+                          <p className="text-xs text-gray-600">{member.status}</p>
+                        </div>
+                      </div>
+                      <button className="px-3 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-xs rounded-lg transition-all duration-200 shadow-md hover:shadow-lg">
+                        Renew
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* Membership Overdues */}
+              <div className="bg-white border-gray-200 shadow-lg rounded-2xl px-6 py-8 border flex flex-col justify-between h-full">
+                <h3 className="text-lg font-bold mb-6 text-gray-800 text-center">Membership Overdues</h3>
+                <div className="space-y-3">
+                  {membershipData.filter(m => m.type === 'overdue').map((member, index) => (
+                    <div key={index} className="flex items-center justify-between p-4 bg-gradient-to-r from-red-50 to-pink-50 hover:from-red-100 hover:to-pink-100 rounded-xl transition-all duration-200">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-gradient-to-r from-red-500 to-pink-600 rounded-full flex items-center justify-center shadow-md">
+                          <span className="text-sm font-bold text-white">{member.avatar}</span>
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-gray-800">{member.name}</p>
+                          <p className="text-xs text-red-600">{member.status}</p>
+                        </div>
+                      </div>
+                      <button className="px-3 py-1.5 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-xs rounded-lg transition-all duration-200 shadow-md hover:shadow-lg">
+                        Contact
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className='py-1'></div>
             </div>
-            <div>
-              <p className="text-sm font-semibold text-gray-800">{member.name}</p>
-              <p className="text-xs text-gray-600">{member.status}</p>
-            </div>
-          </div>
-          <button className="px-3 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-xs rounded-lg transition-all duration-200 shadow-md hover:shadow-lg">
-            Renew
-          </button>
-        </div>
-      ))}
-    </div>
-  </div>
-  {/* Membership Overdues */}
-  <div className="bg-white border-gray-200 shadow-lg rounded-2xl px-6 py-8 border flex flex-col justify-between h-full">
-    <h3 className="text-lg font-bold mb-6 text-gray-800 text-center">Membership Overdues</h3>
-    <div className="space-y-3">
-      {membershipData.filter(m => m.type === 'overdue').map((member, index) => (
-        <div key={index} className="flex items-center justify-between p-4 bg-gradient-to-r from-red-50 to-pink-50 hover:from-red-100 hover:to-pink-100 rounded-xl transition-all duration-200">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-red-500 to-pink-600 rounded-full flex items-center justify-center shadow-md">
-              <span className="text-sm font-bold text-white">{member.avatar}</span>
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-gray-800">{member.name}</p>
-              <p className="text-xs text-red-600">{member.status}</p>
-            </div>
-          </div>
-          <button className="px-3 py-1.5 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-xs rounded-lg transition-all duration-200 shadow-md hover:shadow-lg">
-            Contact
-          </button>
-        </div>
-      ))}
-    </div>
-  </div>
-</div>
           </div>
         );
     }
@@ -812,12 +772,41 @@ const FitnessDashboard = () => {
             </div>
             <div className="flex items-center space-x-3 sm:space-x-4">
               <div className="relative">
-                <button className={`p-2 rounded-xl transition-colors hover:bg-gray-100`}>
+                <button
+                  className={`p-2 rounded-xl transition-colors hover:bg-gray-100`}
+                  onClick={() => setShowNotifications((prev) => !prev)}
+                >
                   <Bell className="w-5 h-5" />
                 </button>
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
-                  <span className="text-xs text-white font-medium">3</span>
+                  <span className="text-xs text-white font-medium">{notifications.length}</span>
                 </div>
+                {/* Notification Dropdown */}
+                {showNotifications && (
+                  <div className="absolute right-0 mt-2 w-72 bg-white border border-gray-200 rounded-xl shadow-lg z-50">
+                    <div className="p-4 border-b font-semibold text-gray-700 flex justify-between items-center">
+                      <span>Notifications</span>
+                      <button
+                        className="text-xs text-gray-400 hover:text-gray-700"
+                        onClick={() => setShowNotifications(false)}
+                        title="Close"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                    <ul className="max-h-64 overflow-y-auto">
+                      {notifications.map((n) => (
+                        <li key={n.id} className="px-4 py-3 border-b last:border-b-0 hover:bg-gray-50 transition">
+                          <div className="text-sm text-gray-800">{n.text}</div>
+                          <div className="text-xs text-gray-400 mt-1">{n.time}</div>
+                        </li>
+                      ))}
+                      {notifications.length === 0 && (
+                        <li className="px-4 py-3 text-gray-400 text-sm">No notifications.</li>
+                      )}
+                    </ul>
+                  </div>
+                )}
               </div>
               <div className="flex items-center space-x-3">
                 <div className="text-right hidden sm:block">
@@ -843,7 +832,7 @@ const FitnessDashboard = () => {
           </div>
         </header>
         {/* Dashboard Content */}
-        <main className="p-4 sm:p-6 space-y-6">
+        <main>
             {renderActiveComponent()}
         </main>
       </div>

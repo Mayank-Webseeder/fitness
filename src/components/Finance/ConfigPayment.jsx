@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Trash2, Plus, MoreHorizontal, CreditCard } from 'lucide-react';
+import { Search, Trash2, Plus, MoreHorizontal, CreditCard, Settings } from 'lucide-react';
 
 const ConfigPayment = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -85,11 +85,11 @@ const ConfigPayment = () => {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-200">
-        <div className="flex items-center gap-2">
-          <CreditCard className="w-5 h-5 text-gray-600" />
-          <h1 className="text-lg font-semibold text-gray-900">Payment Mode</h1>
-        </div>
+      
+      <div className="bg-white border-b border-gray-200 mt-0 px-4 py-3 flex items-center shadow-sm">
+        <h1 className=" font-bold text-gray-800 flex items-center font-sans gap-2 ">
+          <Settings/> Payment Modes
+        </h1>
       </div>
 
       {/* Controls */}
