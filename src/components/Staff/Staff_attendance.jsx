@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Download } from "lucide-react";
+import { Download, Users, CalendarDays } from "lucide-react";
 
 const Staff_attendance = () => {
   const [attendanceData] = useState([
@@ -13,8 +13,14 @@ const Staff_attendance = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <h2 className="text-xl font-semibold text-gray-700 mb-6">Staff Attendance</h2>
+    <div className="min-h-screen bg-gray-50 ">
+       {/* Header */}
+            <header className="bg-white border border-gray-200 px-6 py-3 flex items-center shadow-sm mb-4">
+              <h1 className="font-bold text-gray-800 flex items-center gap-2">
+                <CalendarDays />
+                Staff Attendance
+              </h1>
+            </header>
 
       <div className="bg-white rounded-2xl shadow-md p-6">
         {/* Top Bar */}

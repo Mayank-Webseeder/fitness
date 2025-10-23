@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pencil, Trash2, Plus, Users, Search } from "lucide-react";
+import { Pencil, Trash2, Plus, Users, Search, ChartBarStacked } from "lucide-react";
 
 const LeadCategories = () => {
   const [categories, setCategories] = useState([
@@ -33,9 +33,9 @@ const LeadCategories = () => {
     <div className="bg-gray-50 min-h-screen">
       {/* Header */}
       <header className="bg-white border border-gray-200 px-6 py-3 flex items-center shadow-sm mb-4">
-        <h1 className="font-semibold text-gray-800 flex items-center gap-2 text-lg">
-          <Users/>
-          Lead Categories
+        <h1 className="font-semibold text-gray-800 flex items-center gap-2">
+          <ChartBarStacked/>
+          Categories
         </h1>
       </header>
 

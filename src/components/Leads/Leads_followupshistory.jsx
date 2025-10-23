@@ -84,7 +84,7 @@ const Leads_followupshistory = () => {
     <div>
       {/* Header */}
       <header className="bg-white border border-gray-200 px-6 py-3 flex items-center shadow-sm mb-4">
-        <h1 className="font-semibold text-gray-800 flex items-center gap-2 text-lg">
+        <h1 className="font-semibold text-gray-800 flex items-center gap-2 ">
           <ListRestart />
           Follow Ups History
         </h1>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pencil, Trash2, Plus } from "lucide-react";
+import { Pencil, Trash2, Plus, Users, ListChecks } from "lucide-react";
 
 const FollowupTypes = () => {
   const [types, setTypes] = useState([
@@ -24,8 +24,14 @@ const FollowupTypes = () => {
   };
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
-      <h1 className="text-2xl font-semibold mb-6">Followup Types</h1>
+    <div className="bg-gray-50 min-h-screen">
+      {/* Header */}
+      <header className="bg-white border border-gray-200 px-6 py-3 flex items-center shadow-sm mb-4">
+        <h1 className="font-semibold text-gray-800 flex items-center gap-2 ">
+          <ListChecks/>
+          Follow Up Types
+        </h1>
+      </header>
 
       {/* Search + Add */}
       <div className="flex items-center justify-between mb-4">
