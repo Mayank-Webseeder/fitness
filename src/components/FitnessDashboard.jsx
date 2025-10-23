@@ -313,7 +313,7 @@ const FitnessDashboard = () => {
       hasSubmenu: true,
       submenu: [
         { icon: Users, label: 'All Staff', key: 'all-staff' },
-        { icon: UserRoundPlus, label: 'Add Staff', key: 'add-staff' },
+        // { icon: UserRoundPlus, label: 'Add Staff', key: 'add-staff' },
         { icon: CalendarDays, label: 'Attendance', key: 'staff-attendance' },
         { 
           icon: Settings, 
