@@ -211,7 +211,7 @@ const Leads_followupshistory = () => {
       {/* Add Modal */}
       {showAddModal && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40"
+          className="fixed inset-0 z-50 flex items-center justify-center  bg-opacity-40"
           style={{ backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)" }}
         >
           <div className="bg-white rounded-xl shadow-lg w-full max-w-md p-6 relative">

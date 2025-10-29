@@ -16,9 +16,7 @@ const Sms_history = () => {
       <div className="p-6">
         {/* Search + Filter */}
         <div className="flex items-center gap-2 mb-4">
-          <button className="p-2 border border-gray-300 rounded-md bg-white hover:bg-gray-100">
-            <Filter className="w-5 h-5 text-gray-600" />
-          </button>
+          
           <input
             type="text"
             placeholder="Search by name or number..."

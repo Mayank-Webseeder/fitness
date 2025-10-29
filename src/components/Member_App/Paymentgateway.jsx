@@ -3,36 +3,11 @@ import { Search, RefreshCcw } from "lucide-react";
 
 const PaymentGateway = () => {
   const gateways = [
-    {
-      name: "Razorpay",
-      merchantId: "MER-1001",
-      createdOn: "08/15/2025",
-      status: "Active",
-    },
-    {
-      name: "Paytm",
-      merchantId: "MER-1002",
-      createdOn: "08/20/2025",
-      status: "Inactive",
-    },
-    {
-      name: "PhonePe",
-      merchantId: "MER-1003",
-      createdOn: "08/25/2025",
-      status: "Active",
-    },
-    {
-      name: "Cashfree",
-      merchantId: "MER-1004",
-      createdOn: "08/27/2025",
-      status: "Pending",
-    },
-    {
-      name: "Stripe",
-      merchantId: "MER-1005",
-      createdOn: "09/01/2025",
-      status: "Active",
-    },
+    { name: "Razorpay", merchantId: "MER-1001", createdOn: "08/15/2025", status: "Active" },
+    { name: "Paytm", merchantId: "MER-1002", createdOn: "08/20/2025", status: "Inactive" },
+    { name: "PhonePe", merchantId: "MER-1003", createdOn: "08/25/2025", status: "Active" },
+    { name: "Cashfree", merchantId: "MER-1004", createdOn: "08/27/2025", status: "Pending" },
+    { name: "Stripe", merchantId: "MER-1005", createdOn: "09/01/2025", status: "Active" },
   ];
 
   return (
@@ -42,51 +17,53 @@ const PaymentGateway = () => {
         Payment Gateways
       </h2>
 
-      {/* Search and Refresh */}
-      <div className="flex items-center gap-3 mb-5">
-        <div className="flex items-center border rounded-lg px-3 py-2 w-80">
-          <Search className="w-4 h-4 text-gray-500 mr-2" />
-          <input
-            type="text"
-            placeholder="Search by name or merchant ID"
-            className="w-full outline-none text-sm"
-          />
+      {/* Search + Refresh */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center bg-white border border-gray-300 rounded-lg shadow-sm px-3 py-2 w-80">
+            <Search className="w-4 h-4 text-gray-500 mr-2" />
+            <input
+              type="text"
+              placeholder="Search by name or merchant ID"
+              className="w-full outline-none text-sm text-gray-700 placeholder-gray-400"
+            />
+          </div>
+          <button className="flex items-center gap-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 bg-white text-gray-700 shadow-sm transition">
+            <RefreshCcw className="w-4 h-4" />
+            <span className="text-sm font-medium">REFRESH</span>
+          </button>
         </div>
-        <button className="flex items-center gap-1 px-4 py-2 border rounded-lg hover:bg-gray-100">
-          <RefreshCcw className="w-4 h-4" />
-          <span className="text-sm font-medium">REFRESH</span>
-        </button>
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto bg-white shadow rounded-xl">
-        <table className="min-w-full border-collapse">
-          <thead>
-            <tr className="bg-gray-100 text-left text-sm text-gray-600">
-              <th className="py-3 px-4 border-b">Gateway Name</th>
-              <th className="py-3 px-4 border-b">Merchant ID</th>
-              <th className="py-3 px-4 border-b">Created On</th>
-              <th className="py-3 px-4 border-b">Status</th>
+      <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+        <table className="min-w-full text-sm text-gray-700">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="py-3 px-4 text-left font-semibold text-gray-700 border-b border-gray-200">Gateway Name</th>
+              <th className="py-3 px-4 text-left font-semibold text-gray-700 border-b border-gray-200">Merchant ID</th>
+              <th className="py-3 px-4 text-left font-semibold text-gray-700 border-b border-gray-200">Created On</th>
+              <th className="py-3 px-4 text-left font-semibold text-gray-700 border-b border-gray-200">Status</th>
             </tr>
           </thead>
           <tbody>
-            {gateways.map((gw) => (
+            {gateways.map((gw, index) => (
               <tr
-                key={gw.merchantId}
-                className="hover:bg-gray-50 text-sm text-gray-700"
+                key={index}
+                className="hover:bg-gray-50 transition border-b border-gray-200 last:border-none"
               >
-                <td className="py-3 px-4 border-b">{gw.name}</td>
-                <td className="py-3 px-4 border-b">{gw.merchantId}</td>
-                <td className="py-3 px-4 border-b">{gw.createdOn}</td>
-                <td className="py-3 px-4 border-b">
+                <td className="py-3 px-4">{gw.name}</td>
+                <td className="py-3 px-4">{gw.merchantId}</td>
+                <td className="py-3 px-4">{gw.createdOn}</td>
+                <td className="py-3 px-4">
                   <span
-                    className={`px-2 py-1 rounded-full text-xs font-medium
+                    className={`px-3 py-1 rounded-full text-xs font-medium border 
                       ${
                         gw.status === "Active"
-                          ? "bg-green-100 text-green-700"
+                          ? "bg-green-50 text-green-700 border-green-300"
                           : gw.status === "Inactive"
-                          ? "bg-red-100 text-red-700"
-                          : "bg-yellow-100 text-yellow-700"
+                          ? "bg-red-50 text-red-700 border-red-300"
+                          : "bg-yellow-50 text-yellow-700 border-yellow-300"
                       }`}
                   >
                     {gw.status}
