@@ -37,12 +37,7 @@ const Attendance = () => {
           />
         </div>
 
-        {/* Messages Button */}
-        {/* <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">
-          <MessageSquare size={18} />
-          <span className="text-sm font-medium">Messages</span>
-        </button> */}
-
+       
         {/* Export Button */}
         <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
           <Download size={18} />

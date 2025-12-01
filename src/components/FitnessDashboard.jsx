@@ -118,7 +118,6 @@ import Leads_followupshistory from './Leads/Leads_followupshistory';
 import Feedback from './Member/Feedback';
 import Follow_ups_history from './Member/Follow_ups_history';
 import Attendance from './Member/Attendance';
-import Add_staff from './Staff/Add_staff';
 import All_staff from './Staff/All_staff';
 import Staff_attendance from './Staff/Staff_attendance';
 import AllWorkoutPlan from './Workout/AllWorkoutPlan';

@@ -230,7 +230,6 @@ const All_members = () => {
     <div>
       {/* Add Member Popup */}
       {showAddPopup && (
-        // <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md">
 
           <div className="bg-white rounded-xl shadow-lg w-full max-w-lg p-8 relative">
@@ -349,7 +348,7 @@ const All_members = () => {
 
       {/* Edit Member Popup */}
       {showEditPopup && editForm && (
-        // <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md">
 
           <div className="bg-white rounded-xl shadow-lg w-full max-w-lg p-8 relative">

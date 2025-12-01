@@ -154,7 +154,6 @@ const Bulk_whatsapp = () => {
             </button>
           </div>
         </div>
-
         {/* Table */}
         <div className="overflow-hidden rounded-lg shadow-sm border border-gray-200 bg-white">
           <table className="w-full border-collapse text-sm">
