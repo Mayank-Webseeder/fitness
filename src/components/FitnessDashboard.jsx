@@ -112,10 +112,8 @@ import Staff_Types from './Staff/Staff_Types';
 import General_templates from './SMS/General_templates';
 import Bulk_whatsapp from './SMS/Bulk_whatsapp';
 import Sms_settings from './SMS/Sms_settings';
-import Add_members from './Member/Add_members';
 import All_members from './Member/All_members';
 import All_leads from './Leads/All_leads';
-import Add_leads from './Leads/Add_leads';
 import Leads_followupshistory from './Leads/Leads_followupshistory';
 import Feedback from './Member/Feedback';
 import Follow_ups_history from './Member/Follow_ups_history';
@@ -288,7 +286,6 @@ const FitnessDashboard = () => {
       hasSubmenu: true,
       submenu: [
         { icon: Users, label: 'All Leads', key: 'all-leads' },
-        // { icon: UserRoundPlus, label: 'Add Leads', key: 'add-leads' },
         { icon: ListRestart, label: 'Follow Ups History', key: 'leads-follow-ups-history' },
         { 
           icon: Settings, 
@@ -313,7 +310,6 @@ const FitnessDashboard = () => {
       hasSubmenu: true,
       submenu: [
         { icon: Users, label: 'All Staff', key: 'all-staff' },
-        // { icon: UserRoundPlus, label: 'Add Staff', key: 'add-staff' },
         { icon: CalendarDays, label: 'Attendance', key: 'staff-attendance' },
         { 
           icon: Settings, 
@@ -402,7 +398,7 @@ const FitnessDashboard = () => {
     { icon: UserCog, label: 'Profile', key: 'profile', active: activeComponent === 'profile' }
   ];
 
-  // Recursive SidebarItem for nested submenus
+
   const SidebarItem = ({ item, active, onClick }) => {
     const isExpanded = expandedMenus[item.label];
     const Icon = item.icon;
